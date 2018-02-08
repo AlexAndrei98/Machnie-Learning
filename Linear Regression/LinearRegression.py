@@ -2,7 +2,9 @@ import numpy as np
 from scipy.optimize import minimize
 from scipy.stats import norm
 import math as mt
-
+import matplotlib.pyplot as plt
+from matplotlib import cm
+from mpl_toolkits.mplot3d import Axes3D
 class LinearRegression:
 
     def __init__(self,X,y):
@@ -71,17 +73,36 @@ print("Testing r^2:", lm1.score(X_test, y_test), "\n")
 X_new = np.array([[3,7], [6,1], [5,5]])
 print("Predictions:", lm1.predict(X_new))
 
-#Testing algorithm with three features
-np.random.seed(1)
-X = np.random.uniform(0,10,150).reshape(50,3)
-y = 7 -2.1 * X[:,0] + 4.1 * X[:,1] + 3.5 * X[:,2] + np.random.normal(0,3,50)
-lm2 = LinearRegression(X,y)
-lm2.summary()
-X_test = np.random.uniform(0,10,60).reshape(20,3)
-y_test = 7 -2.1 * X_test[:,0] + 4.1 * X_test[:,1] + 3.5 * X_test[:,2] 
-y_test += np.random.normal(0,3,20)
-print("Testing r^2:", lm2.score(X_test, y_test), "\n")
-X_new = np.array([[3,7,1], [6,1,4], [5,5,5]])
-print("Predictions:", lm2.predict(X_new))
+plt.close()
+fig = plt.figure()
+ax = fig.gca(projection='3d')
+
+ax.scatter(X[:,0], X[:,1],y, marker = 'o')
+
+plt.close()
+fig = plt.figure()
+ax = fig.gca(projection='3d')
+
+
+x1grid = np.arange(0, 10, 0.25)
+x2grid = np.arange(0, 10, 0.25)
+x1grid, x2grid = np.meshgrid(x1grid, x2grid)
+ygrid = lm1.coefficients[0]+ lm1.coefficients[1] * x1grid + lm1.coefficients[2] * x2grid
+ax.scatter(X[:,0], X[:,1],y, marker = 'o')
+ax.plot_surface(x1grid, x2grid, ygrid, cmap=cm.coolwarm, alpha=0.8)
+
+
+ax.set_xlabel('x1')
+ax.set_ylabel('x2')
+ax.set_zlabel('y')
+plt.show()
+
+ax.set_xlabel('x1')
+ax.set_ylabel('x2')
+ax.set_zlabel('y')
+plt.show()
+
+
+
 
 
