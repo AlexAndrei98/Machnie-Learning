@@ -15,7 +15,7 @@ class LinearRegression:
         
         def find_sse(beta):
             y_hat = beta[0] + np.sum(beta[1:] * self.data, axis=1)
-            residuals = y - y_hat
+            residuals = self.y - y_hat
             return np.sum(residuals**2)
             
         #initial guess is set to Zeros.
@@ -26,11 +26,11 @@ class LinearRegression:
         #array of best predicted y values 
         self.y_predicted = self.predict(self.data)
         #Residcals between y and the optimal y 
-        self.residuals= y-self.y_predicted
+        self.residuals= self.y-self.y_predicted
         # The sum of squared errors objective function
         self.sse=np.sum(self.residuals **2)
         # the sum os squares 
-        self.sst = np.sum((y-(np.mean(y)))**2)
+        self.sst = np.sum((self.y-(np.mean(self.y)))**2)
         #r squared will be between 0-1 with one being best
         self.r_squared= 1 - (self.sse/self.sst)
  		#the residual standard error
