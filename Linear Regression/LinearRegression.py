@@ -77,12 +77,6 @@ plt.close()
 fig = plt.figure()
 ax = fig.gca(projection='3d')
 
-ax.scatter(X[:,0], X[:,1],y, marker = 'o')
-
-plt.close()
-fig = plt.figure()
-ax = fig.gca(projection='3d')
-
 
 x1grid = np.arange(0, 10, 0.25)
 x2grid = np.arange(0, 10, 0.25)
@@ -91,11 +85,6 @@ ygrid = lm1.coefficients[0]+ lm1.coefficients[1] * x1grid + lm1.coefficients[2] 
 ax.scatter(X[:,0], X[:,1],y, marker = 'o')
 ax.plot_surface(x1grid, x2grid, ygrid, cmap=cm.coolwarm, alpha=0.8)
 
-
-ax.set_xlabel('x1')
-ax.set_ylabel('x2')
-ax.set_zlabel('y')
-plt.show()
 
 ax.set_xlabel('x1')
 ax.set_ylabel('x2')
