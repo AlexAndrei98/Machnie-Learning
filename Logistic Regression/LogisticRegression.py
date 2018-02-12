@@ -85,3 +85,21 @@ print(fruit_mod.predict_proba(X_test))
 print(fruit_mod.predict(X_test))
 print(fruit_mod.score(X_test,y_test))
 
+import matplotlib.pyplot as plt
+from matplotlib import cm
+from mpl_toolkits.mplot3d import Axes3D
+plt.close()
+fig = plt.figure()
+ax = fig.gca(projection='3d')
+
+x1grid = np.arange(0, 10, 0.25)
+x2grid = np.arange(0, 10, 0.25)
+x1grid, x2grid = np.meshgrid(x1grid, x2grid)
+ygrid = fruit_mod.coefficients[0]+ fruit_mod.coefficients[1] * x1grid + fruit_mod.coefficients[2] * x2grid
+ax.plot_surface(x1grid, x2grid, ygrid, cmap=cm.coolwarm, alpha=0.8)
+
+
+ax.set_xlabel('x1')
+ax.set_ylabel('x2')
+ax.set_zlabel('y')
+plt.show()
