@@ -55,6 +55,8 @@ class LinearRegression:
         print('+----------------------------+')
         print('| Linear Regression Summary  |')
         print('+----------------------------+')
+        print("Data",str(self.data))
+        print("Labels",str(self.y))
         print('Number of training observations:', str(self.n_observation))
         print('Coefficient Estimates:', str(self.coefficients))
         print('Residual Standard Error:', str(self.rse))
