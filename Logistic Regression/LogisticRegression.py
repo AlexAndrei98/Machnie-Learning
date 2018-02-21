@@ -45,17 +45,20 @@ class LogisticRegression:
         prediction = self.predict(X)
         return np.sum(prediction==y)/len(y)
     
-    def confusion_matrix(self, X,y,t=0.5):
+    def confusion_matrix(self,X,y,t=0.5):
         X = np.array(X)
         y = np.array(y)
         class_0 = self.classes[0]
         class_1 = self.classes[1]
-        y_predicted = self.predict(self.X,t)
-        TP = np.sum((self.y==class_0) & (y_predicted == class_0))
-        FP = np.sum((self.y==class_0) & (y_predicted == class_1))
-        TN = np.sum((self.y==class_1) & (y_predicted == class_0))
-        FN = np.sum((self.y==class_1) & (y_predicted == class_1))
+        y_predicted = self.predict(X,t)
+        TP = np.sum((y==class_0) & (y_predicted == class_0))
+        FP = np.sum((y==class_0) & (y_predicted == class_1))
+        TN = np.sum((y==class_1) & (y_predicted == class_0))
+        FN = np.sum((y==class_1) & (y_predicted == class_1))
         cm = pd.DataFrame([[TP,FP],[TN, FN]])
+        print('Class 0:',str(self.classes[0]))
+        print('Class 1:',str(self.classes[1]))
+        print('')
         cm.columns = ['Pred_0', 'Pred_1'] 
         cm.index = ['True_0','True_1']
         print(cm)
@@ -70,11 +73,7 @@ class LogisticRegression:
         print('Log-Likelihood:', str(self.loglik))
         print('Accuracy:', str(self.accuracy))
         print('')
-        print('Class 0:',str(self.classes[0]))
-        print('Class 1:',str(self.classes[1]))
-        print('')
-
-#----------------------------TEST CODE-----------------------------------------
+#--------TEST CODE-----------------------------------------
 
 width = [6.4, 7.7, 6.7, 7.4, 6.5, 6.9, 7.8, 7.6, 6.2, 7.4, 7.7, 6.8]
 height = [8.2, 7.5, 6.6, 8.8, 6.8, 6.8, 7.6, 8.8, 8.4, 7.3, 7.4, 7.2]
